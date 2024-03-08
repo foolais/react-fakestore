@@ -26,7 +26,7 @@ const FormRegister = () => {
         label="Confirm Password"
         type="password"
         name="confirmPassword"
-        placeholder="password"
+        placeholder="*****"
       />
       <Button classname="bg-primary w-full mt-3">Register</Button>
     </form>
