@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-const ButtonWithBorder = (props) => {
+const SecondaryButton = (props) => {
   const { children, classname } = props;
   return (
     <button
@@ -10,4 +10,4 @@ const ButtonWithBorder = (props) => {
   );
 };
 
-export default ButtonWithBorder;
+export default SecondaryButton;

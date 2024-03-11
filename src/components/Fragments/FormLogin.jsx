@@ -1,4 +1,4 @@
-import Button from "../Elements/Button";
+import PrimaryButton from "../Elements/Button/PrimaryButton";
 import InputForm from "../Elements/Input";
 
 const FormLogin = () => {
@@ -18,7 +18,9 @@ const FormLogin = () => {
         placeholder="*****"
         isWithLabel={true}
       />
-      <Button classname="bg-primary w-full mt-3 rounded-md ">Login</Button>
+      <PrimaryButton classname="bg-primary w-full mt-3 rounded-md ">
+        Login
+      </PrimaryButton>
     </form>
   );
 };

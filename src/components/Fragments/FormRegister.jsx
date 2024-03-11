@@ -1,4 +1,4 @@
-import Button from "../Elements/Button";
+import PrimaryButton from "../Elements/Button/PrimaryButton";
 import InputForm from "../Elements/Input";
 
 const FormRegister = () => {
@@ -32,7 +32,9 @@ const FormRegister = () => {
         placeholder="*****"
         isWithLabel={true}
       />
-      <Button classname="bg-primary w-full rounded-md  mt-3">Register</Button>
+      <PrimaryButton classname="bg-primary w-full rounded-md  mt-3">
+        Register
+      </PrimaryButton>
     </form>
   );
 };

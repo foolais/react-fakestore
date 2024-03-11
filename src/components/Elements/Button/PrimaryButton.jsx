@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-const Button = (props) => {
+const PrimaryButton = (props) => {
   const { children, classname } = props;
   return (
     <button
@@ -10,4 +10,4 @@ const Button = (props) => {
   );
 };
 
-export default Button;
+export default PrimaryButton;
