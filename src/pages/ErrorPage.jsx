@@ -8,7 +8,9 @@ const ErrorPage = () => {
       </h1>
       <p className="text-xl mb-2">Oops...Page not found.</p>
       <Link to={"/"}>
-        <p className="text-md cursor-pointer text-ternary">Homepage</p>
+        <p className="text-md cursor-pointer text-ternary hover:text-secondary">
+          Homepage
+        </p>
       </Link>
     </div>
   );
