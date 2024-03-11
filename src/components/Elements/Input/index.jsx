@@ -3,10 +3,10 @@ import Input from "./Input";
 import Label from "./Label";
 
 const InputForm = (props) => {
-  const { label, type, name, placeholder } = props;
+  const { label, type, name, placeholder, isWithLabel = false } = props;
   return (
     <div className="mb-4">
-      <Label htmlFor={name}>{label}</Label>
+      {isWithLabel && <Label htmlFor={name}>{label}</Label>}
       <Input type={type} name={name} placeholder={placeholder} />
     </div>
   );

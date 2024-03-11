@@ -9,12 +9,14 @@ const FormLogin = () => {
         type="text"
         name="username"
         placeholder="John Doe"
+        isWithLabel={true}
       />
       <InputForm
         label="Password"
         type="password"
         name="password"
         placeholder="*****"
+        isWithLabel={true}
       />
       <Button classname="bg-primary w-full mt-3">Login</Button>
     </form>
