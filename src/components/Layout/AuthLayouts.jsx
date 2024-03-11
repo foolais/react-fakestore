@@ -34,7 +34,7 @@ const Navigation = ({ type }) => {
         : "Already have an account? "}
       <Link to={type === "login" ? "/register" : "/login"}>
         <span className="text-primary cursor-pointer">
-          {type === "login" ? "Login" : "Register"}
+          {type === "login" ? "Register" : "Login"}
         </span>
       </Link>
     </p>
