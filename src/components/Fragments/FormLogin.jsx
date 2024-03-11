@@ -18,7 +18,7 @@ const FormLogin = () => {
         placeholder="*****"
         isWithLabel={true}
       />
-      <Button classname="bg-primary w-full mt-3">Login</Button>
+      <Button classname="bg-primary w-full mt-3 rounded-md ">Login</Button>
     </form>
   );
 };

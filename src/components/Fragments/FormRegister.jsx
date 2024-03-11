@@ -32,7 +32,7 @@ const FormRegister = () => {
         placeholder="*****"
         isWithLabel={true}
       />
-      <Button classname="bg-primary w-full mt-3">Register</Button>
+      <Button classname="bg-primary w-full rounded-md  mt-3">Register</Button>
     </form>
   );
 };
