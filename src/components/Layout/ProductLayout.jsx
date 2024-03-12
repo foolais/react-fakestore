@@ -1,4 +1,4 @@
-import shoes from "../../../public/images/shoes";
+import shoes from "../../assets/shoes";
 import SecondaryButton from "../Elements/Button/SecondaryButton";
 import Counter from "../Elements/Counter";
 import CardProduct from "../Fragments/CardProduct";

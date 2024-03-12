@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import Title from "../Elements/Title";
-import background from "../../../public/images/background";
+import background from "../../assets/background";
 import { Link } from "react-router-dom";
 
 const AuthLayouts = (props) => {
