@@ -1,5 +1,5 @@
 import ProductLayout from "../components/Layout/ProductLayout";
-import ChartLayouts from "../components/Layout/ChartLayouts";
+import CartLayouts from "../components/Layout/CartLayouts";
 import Sidenav from "../components/Fragments/Sidenav";
 
 const HomePage = () => {
@@ -8,7 +8,7 @@ const HomePage = () => {
       <Sidenav />
       <div className="w-1/6"></div>
       <ProductLayout />
-      <ChartLayouts />
+      <CartLayouts />
     </div>
   );
 };

@@ -48,8 +48,9 @@ const products = [
 
 const ProductLayout = () => {
   return (
-    <div className="w-2/3 bg-gray-300 p-4">
-      <div className="flex flex-wrap w-full gap-4">
+    <div className="w-2/3 bg-gray-200 relative">
+      <div className="w-full bg-ternary h-20 border-b-2 border-r-2 border-slate-200 sticky top-0"></div>
+      <div className="flex flex-wrap w-full gap-4 p-4">
         {products.map((product) => {
           return (
             <CardProduct key={product.id}>
