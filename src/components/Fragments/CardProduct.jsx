@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
 
 const CardProduct = (props) => {
-  const { children } = props;
-  return <div className="bg-ternary rounded-md p-4 w-[49%]">{children}</div>;
+  const { children, classname } = props;
+  return (
+    <div className={`bg-ternary rounded-md p-4  ${classname}`}>{children}</div>
+  );
 };
 
 const Image = ({ src }) => {
@@ -10,7 +12,7 @@ const Image = ({ src }) => {
     <img
       src={src}
       alt="shoes"
-      className="w-full min-h-40 h-full object-cover object-center rounded-lg"
+      className="w-full min-h-32 h-full object-cover object-center rounded-lg shadow-md"
     />
   );
 };
@@ -27,12 +29,13 @@ const Description = (props) => {
   );
 };
 
-const Title = ({ title }) => {
-  return <h3 className="text-lg font-semibold">{title}</h3>;
+const Title = (props) => {
+  const { title, classname } = props;
+  return <h3 className={`font-semibold text-lg ${classname}`}>{title}</h3>;
 };
 
 const Price = ({ price }) => {
-  return <span className="text-primary">$ {price}</span>;
+  return <span className="text-primary font-semibold">$ {price}</span>;
 };
 
 CardProduct.Image = Image;

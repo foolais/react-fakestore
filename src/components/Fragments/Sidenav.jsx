@@ -15,7 +15,7 @@ const Sidenav = () => {
     }
   };
   return (
-    <div className="w-1/6 h-screen fixed bg-ternary p-4 border-r-2 border-slate-200 shadow-md">
+    <div className="w-[15%] h-screen fixed bg-ternary p-4 border-r-2 border-slate-200 shadow-md">
       <Title classname="text-3xl mb-4" />
       <Link to={"/login"}>
         <span>Login</span>

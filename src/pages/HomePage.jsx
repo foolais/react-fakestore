@@ -6,7 +6,7 @@ const HomePage = () => {
   return (
     <div className="w-full min-h-screen flex relative">
       <Sidenav />
-      <div className="w-1/6"></div>
+      <div className="w-[15%]"></div>
       <ProductLayout />
       <CartLayouts />
     </div>
