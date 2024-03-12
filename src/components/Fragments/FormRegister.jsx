@@ -15,7 +15,7 @@ const FormRegister = () => {
         label="Username"
         type="text"
         name="username"
-        placeholder="John Doe"
+        placeholder="Johndoe"
         isWithLabel={true}
       />
       <InputForm

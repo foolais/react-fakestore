@@ -37,7 +37,7 @@ const products = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, quam porro velit dolorum consequuntur voluptatum.",
   },
   {
-    id: 3,
+    id: 5,
     title: "Red Velvet",
     price: 13.0,
     image: shoes,
@@ -48,32 +48,34 @@ const products = [
 
 const ProductLayout = () => {
   return (
-    <div className="flex flex-wrap w-full gap-4">
-      {products.map((product) => {
-        return (
-          <CardProduct key={product.id}>
-            <div className="flex w-full">
-              <div className="w-1/3">
-                <CardProduct.Image src={product.image} />
+    <div className="w-2/3 bg-gray-300 p-4">
+      <div className="flex flex-wrap w-full gap-4">
+        {products.map((product) => {
+          return (
+            <CardProduct key={product.id}>
+              <div className="flex w-full">
+                <div className="w-1/3">
+                  <CardProduct.Image src={product.image} />
+                </div>
+                <div className="w-2/3 flex flex-col py-2 px-4">
+                  <CardProduct.Description description={product.description}>
+                    <CardProduct.Title title={product.title} />
+                    <CardProduct.Price price={product.price} />
+                  </CardProduct.Description>
+                </div>
               </div>
-              <div className="w-2/3 flex flex-col py-2 px-4">
-                <CardProduct.Description description={product.description}>
-                  <CardProduct.Title title={product.title} />
-                  <CardProduct.Price price={product.price} />
-                </CardProduct.Description>
+              <div className="flex">
+                <Counter classname="w-1/3" />
+                <div className="w-2/3">
+                  <SecondaryButton classname="w-10/12 rounded-2xl">
+                    Add to Cart
+                  </SecondaryButton>
+                </div>
               </div>
-            </div>
-            <div className="flex">
-              <Counter classname="w-1/3" />
-              <div className="w-2/3">
-                <SecondaryButton classname="w-10/12 rounded-2xl">
-                  Add to Cart
-                </SecondaryButton>
-              </div>
-            </div>
-          </CardProduct>
-        );
-      })}
+            </CardProduct>
+          );
+        })}
+      </div>
     </div>
   );
 };

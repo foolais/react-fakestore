@@ -1,20 +1,14 @@
-import { Link } from "react-router-dom";
-import Title from "../components/Elements/Title";
 import ProductLayout from "../components/Layout/ProductLayout";
+import ChartLayouts from "../components/Layout/ChartLayouts";
+import Sidenav from "../components/Fragments/Sidenav";
 
 const HomePage = () => {
   return (
-    <div className="w-full min-h-screen flex bg-primary">
-      <div className="w-1/6 min-h-screen bg-ternary p-4">
-        <Title classname="text-3xl mb-4" />
-        <Link to={"/login"}>
-          <span>Login</span>
-        </Link>
-      </div>
-      <div className="w-2/3 bg-gray-300 p-4">
-        <ProductLayout />
-      </div>
-      <div className="w-1/6 p-4">Chart</div>
+    <div className="w-full min-h-screen flex relative">
+      <Sidenav />
+      <div className="w-1/6"></div>
+      <ProductLayout />
+      <ChartLayouts />
     </div>
   );
 };
