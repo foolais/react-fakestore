@@ -21,7 +21,7 @@ const Sidenav = () => {
         <span>Login</span>
       </Link>
       <div className="absolute bottom-14 left-10">
-        <TextIcon title="Log out" onClick={handleLogout}>
+        <TextIcon title="Log out" onClick={() => handleLogout()}>
           <AiOutlineLogout size={25} />
         </TextIcon>
       </div>
