@@ -1,7 +1,9 @@
+import { useState } from "react";
 import shoes from "../../assets/shoes";
 import SecondaryButton from "../Elements/Button/SecondaryButton";
 import Counter from "../Elements/Counter";
 import CardProduct from "../Fragments/CardProduct";
+import { useEffect } from "react";
 
 const products = [
   {
@@ -9,6 +11,7 @@ const products = [
     title: "Matcha Latte",
     price: 14,
     image: shoes,
+    quantity: 1,
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, quam porro velit dolorum consequuntur voluptatum.",
   },
@@ -17,6 +20,7 @@ const products = [
     title: "Coffe Latte",
     price: 15,
     image: shoes,
+    quantity: 1,
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, quam porro velit dolorum consequuntur voluptatum.",
   },
@@ -25,6 +29,7 @@ const products = [
     title: "Caramel Latte",
     price: 13,
     image: shoes,
+    quantity: 1,
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, quam porro velit dolorum consequuntur voluptatum.",
   },
@@ -33,6 +38,7 @@ const products = [
     title: "Hazelnut Latte",
     price: 12,
     image: shoes,
+    quantity: 1,
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, quam porro velit dolorum consequuntur voluptatum.",
   },
@@ -41,12 +47,44 @@ const products = [
     title: "Red Velvet",
     price: 14.5,
     image: shoes,
+    quantity: 1,
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, quam porro velit dolorum consequuntur voluptatum.",
   },
 ];
 
 const ProductLayout = () => {
+  const [cart, setCart] = useState([]);
+
+  const handleAddToCart = ({ id, title, image, price }) => {
+    const newProduct = {
+      id,
+      title,
+      price,
+      image,
+      quantity: 1,
+    };
+
+    // Cari product dengan id yang sama di cart
+    const existingProduct = cart.find((item) => item.id === id);
+    // jika ada produk yang sama lakukan penambahan quantity
+    if (existingProduct) {
+      setCart((prevCart) => {
+        return prevCart.map(
+          (item) => item.id === id && { ...item, quantity: item.quantity + 1 }
+        );
+      });
+    } else {
+      // jika tidak ada produk yang sama, tambahkan newProduct
+      setCart((prevCart) => [...prevCart, newProduct]);
+    }
+  };
+
+  // Jika ada perubahan pada cart, simpan ke localStorage
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
   return (
     <div className="w-[65%] bg-gray-200 relative">
       <div className="w-full bg-ternary h-20 border-b-2 border-r-2 border-slate-200 sticky top-0 shadow-sm"></div>
@@ -66,9 +104,12 @@ const ProductLayout = () => {
                 </div>
               </div>
               <div className="flex">
-                <Counter classname="w-1/3 gap-4" />
+                <Counter classname="w-1/3 gap-4" value={product.quantity} />
                 <div className="w-2/3">
-                  <SecondaryButton classname="w-10/12 rounded-2xl">
+                  <SecondaryButton
+                    classname="w-10/12 rounded-2xl"
+                    onClick={() => handleAddToCart(product)}
+                  >
                     Add to Cart
                   </SecondaryButton>
                 </div>
