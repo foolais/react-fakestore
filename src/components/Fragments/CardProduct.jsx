@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { formatUSDCurrency } from "../../utils/utils";
 
 const CardProduct = (props) => {
   const { children, classname } = props;
@@ -35,7 +36,11 @@ const Title = (props) => {
 };
 
 const Price = ({ price }) => {
-  return <span className="text-primary font-semibold">$ {price}</span>;
+  return (
+    <span className="text-primary font-semibold">
+      {formatUSDCurrency(price)}
+    </span>
+  );
 };
 
 CardProduct.Image = Image;

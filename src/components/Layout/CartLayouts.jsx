@@ -7,19 +7,19 @@ const products = [
   {
     id: 1,
     title: "Matcha Latte",
-    price: "12.00",
+    price: 14,
     image: shoes,
   },
   {
     id: 2,
     title: "Red Velvet",
-    price: "11.00",
+    price: 14.5,
     image: shoes,
   },
   {
     id: 3,
     title: "Coffe Latte",
-    price: "14.00",
+    price: 15,
     image: shoes,
   },
 ];

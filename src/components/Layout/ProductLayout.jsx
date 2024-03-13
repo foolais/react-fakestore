@@ -7,7 +7,7 @@ const products = [
   {
     id: 1,
     title: "Matcha Latte",
-    price: "14.00",
+    price: 14,
     image: shoes,
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, quam porro velit dolorum consequuntur voluptatum.",
@@ -15,7 +15,7 @@ const products = [
   {
     id: 2,
     title: "Coffe Latte",
-    price: "15.00",
+    price: 15,
     image: shoes,
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, quam porro velit dolorum consequuntur voluptatum.",
@@ -23,7 +23,7 @@ const products = [
   {
     id: 3,
     title: "Caramel Latte",
-    price: "13.00",
+    price: 13,
     image: shoes,
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, quam porro velit dolorum consequuntur voluptatum.",
@@ -31,7 +31,7 @@ const products = [
   {
     id: 4,
     title: "Hazelnut Latte",
-    price: "13.00",
+    price: 12,
     image: shoes,
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, quam porro velit dolorum consequuntur voluptatum.",
@@ -39,7 +39,7 @@ const products = [
   {
     id: 5,
     title: "Red Velvet",
-    price: "13.00",
+    price: 14.5,
     image: shoes,
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, quam porro velit dolorum consequuntur voluptatum.",
