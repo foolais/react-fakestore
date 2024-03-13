@@ -1,11 +1,12 @@
-import { useState } from "react";
 import shoes from "../../assets/shoes";
 import SecondaryButton from "../Elements/Button/SecondaryButton";
 import Counter from "../Elements/Counter";
 import CardProduct from "../Fragments/CardProduct";
-import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { handleAddToCart } from "../../redux/slice/cartSlice";
+import { useState } from "react";
 
-const products = [
+const dummyProducts = [
   {
     id: 1,
     title: "Matcha Latte",
@@ -54,36 +55,25 @@ const products = [
 ];
 
 const ProductLayout = () => {
-  const [cart, setCart] = useState([]);
+  const dispatch = useDispatch();
 
-  const handleAddToCart = ({ id, title, image, price }) => {
-    const newProduct = {
-      id,
-      title,
-      price,
-      image,
-      quantity: 1,
-    };
+  const [products, setProducts] = useState(dummyProducts);
 
-    // Cari product dengan id yang sama di cart
-    const existingProduct = cart.find((item) => item.id === id);
-    // jika ada produk yang sama lakukan penambahan quantity
-    if (existingProduct) {
-      setCart((prevCart) => {
-        return prevCart.map(
-          (item) => item.id === id && { ...item, quantity: item.quantity + 1 }
-        );
-      });
-    } else {
-      // jika tidak ada produk yang sama, tambahkan newProduct
-      setCart((prevCart) => [...prevCart, newProduct]);
-    }
+  const handleCounter = (type, id) => {
+    const newProducts = products.map((item) => {
+      if (item.id === id) {
+        const newItem = { ...item };
+        if (type === "ADD") {
+          newItem.quantity = item.quantity + 1;
+        } else {
+          newItem.quantity = item.quantity - 1;
+        }
+        return newItem;
+      }
+      return item;
+    });
+    setProducts(newProducts);
   };
-
-  // Jika ada perubahan pada cart, simpan ke localStorage
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
 
   return (
     <div className="w-[65%] bg-gray-200 relative">
@@ -104,11 +94,16 @@ const ProductLayout = () => {
                 </div>
               </div>
               <div className="flex">
-                <Counter classname="w-1/3 gap-4" value={product.quantity} />
+                <Counter
+                  id={product.id}
+                  value={product.quantity}
+                  handleCounter={handleCounter}
+                  classname="w-1/3 gap-4"
+                />
                 <div className="w-2/3">
                   <SecondaryButton
                     classname="w-10/12 rounded-2xl"
-                    onClick={() => handleAddToCart(product)}
+                    onClick={() => dispatch(handleAddToCart(product))}
                   >
                     Add to Cart
                   </SecondaryButton>

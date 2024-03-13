@@ -1,9 +1,10 @@
+import { useSelector } from "react-redux";
 import Counter from "../Elements/Counter";
 import CardProduct from "../Fragments/CardProduct";
 import NavbarUser from "../Fragments/NavbarUser";
 
 const CartLayouts = () => {
-  const products = localStorage.getItem("isUserLoggedIn") || [];
+  const products = useSelector((state) => state.cart.data);
 
   return (
     <div className="w-1/5 bg-ternary relative">
