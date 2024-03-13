@@ -24,6 +24,7 @@ const FormRegister = () => {
         name="password"
         placeholder="*****"
         isWithLabel={true}
+        autoComplete="new-password"
       />
       <InputForm
         label="Confirm Password"
@@ -31,6 +32,7 @@ const FormRegister = () => {
         name="confirmPassword"
         placeholder="*****"
         isWithLabel={true}
+        autoComplete="new-password"
       />
       <PrimaryButton classname="bg-primary w-full rounded-md  mt-3">
         Register

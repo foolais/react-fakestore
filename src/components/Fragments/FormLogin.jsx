@@ -8,7 +8,7 @@ const FormLogin = () => {
     event.preventDefault();
     const username = event.target.username.value;
     const password = event.target.password.value;
-    console.log(username.length);
+
     if (username.length >= 3 && password.length > 0) {
       localStorage.setItem("user", event.target.username.value);
       navigate("/");
@@ -29,6 +29,7 @@ const FormLogin = () => {
         name="username"
         placeholder="Johndoe"
         isWithLabel={true}
+        autoComplete="username"
       />
       <InputForm
         label="Password"
@@ -36,6 +37,7 @@ const FormLogin = () => {
         name="password"
         placeholder="*****"
         isWithLabel={true}
+        autoComplete="current-password"
       />
       <PrimaryButton
         classname="bg-primary w-full mt-3 rounded-md"
