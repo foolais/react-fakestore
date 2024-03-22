@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { AiOutlineDelete } from "react-icons/ai";
 import { formatUSDCurrency } from "../../utils/utils";
 
 const CardProduct = (props) => {
@@ -43,9 +44,18 @@ const Price = ({ price }) => {
   );
 };
 
+const DeleteIcon = () => {
+  return (
+    <div className="p-1 flex items-center justify-center rounded-full border-2 border-primary text-secondary hover:bg-primary cursor-pointer">
+      <AiOutlineDelete />
+    </div>
+  );
+};
+
 CardProduct.Image = Image;
 CardProduct.Description = Description;
 CardProduct.Title = Title;
 CardProduct.Price = Price;
+CardProduct.DeleteIcon = DeleteIcon;
 
 export default CardProduct;

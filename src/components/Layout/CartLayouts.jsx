@@ -22,24 +22,24 @@ const CartLayouts = () => {
   return (
     <div className="w-1/5 bg-ternary relative">
       <NavbarUser />
-      <div className="p-2 overflow-y-scroll">
-        <h3 className="text-xl font-semibold ml-4 mt-4">Cart {totalPrice}</h3>
+      <div className="py-2 overflow-y-scroll">
+        <h3 className="text-xl font-semibold ml-4 mt-4">Cart</h3>
         {products.length > 0 &&
           products.map((product) => {
             return (
               <CardProduct key={product.id}>
-                <div className="flex w-full gap-4">
+                <div className="flex w-full gap-4 relative">
                   <div className="w-2/5">
                     <CardProduct.Image src={product.image} />
                   </div>
                   <div className="w-3/5">
-                    <CardProduct.Description>
-                      <CardProduct.Title
-                        title={product.title}
-                        classname="mt-4 mb-6"
-                      />
-                    </CardProduct.Description>
-                    <div className="flex gap-4">
+                    <div className="absolute top-0 right-0">
+                      <CardProduct.DeleteIcon />
+                    </div>
+                    <div className="pt-8">
+                      <CardProduct.Title title={product.title} classname="" />
+                    </div>
+                    <div className="flex gap-4 absolute bottom-3">
                       <CardProduct.Price
                         price={product.price * product.quantity}
                       />
@@ -51,11 +51,14 @@ const CartLayouts = () => {
             );
           })}
       </div>
-      <div className="w-full h-16 flex items-center justify-around absolute bottom-0 border-t-2 border-t-slate-200 bg-ternary gap-4">
+      <div className="w-full py-4 flex items-center justify-around absolute bottom-0 border-t-2 border-t-slate-200 bg-ternary gap-4">
         <span className="text-primary font-semibold text-xl">
           {formatUSDCurrency(totalPrice)}
         </span>
-        <SecondaryButton classname="w-1/2 rounded-md flex items-center justify-center gap-2">
+        <SecondaryButton
+          classname="w-1/2 rounded-md flex items-center justify-center gap-2"
+          disabled={totalPrice === 0}
+        >
           <span>Checkout</span>
           <AiOutlineRightCircle size={25} />
         </SecondaryButton>
