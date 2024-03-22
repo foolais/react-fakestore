@@ -7,7 +7,7 @@ const Counter = (props) => {
   return (
     <div className={`flex items-center justify-center  ${classname}`}>
       <div
-        onClick={() => handleCounter("MIN", id)}
+        onClick={() => value > 1 && handleCounter("MIN", id)}
         className="text-secondary border border-slate-400 rounded-full h-max p-1.5 cursor-pointer hover:bg-secondary hover:text-ternary transition duration-150 ease-in-out"
       >
         <AiOutlineMinus size="10" />

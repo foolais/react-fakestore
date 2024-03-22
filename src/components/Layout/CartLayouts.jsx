@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import Counter from "../Elements/Counter";
 import CardProduct from "../Fragments/CardProduct";
@@ -6,8 +6,14 @@ import NavbarUser from "../Fragments/NavbarUser";
 import SecondaryButton from "../Elements/Button/SecondaryButton";
 import { formatUSDCurrency } from "../../utils/utils";
 import { AiOutlineRightCircle } from "react-icons/ai";
+import {
+  handleCartCounter,
+  handleRemoveProduct,
+} from "../../redux/slice/cartSlice";
 
 const CartLayouts = () => {
+  const dispatch = useDispatch();
+
   const [totalPrice, setTotalPrice] = useState(0);
   const products = useSelector((state) => state.cart.data);
 
@@ -18,6 +24,10 @@ const CartLayouts = () => {
     );
     setTotalPrice(total);
   }, [products]);
+
+  const onClickCounter = (type, id) => [
+    dispatch(handleCartCounter({ type, id })),
+  ];
 
   return (
     <div className="w-1/5 bg-ternary relative">
@@ -34,7 +44,11 @@ const CartLayouts = () => {
                   </div>
                   <div className="w-3/5">
                     <div className="absolute top-0 right-0">
-                      <CardProduct.DeleteIcon />
+                      <CardProduct.DeleteIcon
+                        onClick={() =>
+                          dispatch(handleRemoveProduct(product.id))
+                        }
+                      />
                     </div>
                     <div className="pt-8">
                       <CardProduct.Title title={product.title} classname="" />
@@ -43,7 +57,12 @@ const CartLayouts = () => {
                       <CardProduct.Price
                         price={product.price * product.quantity}
                       />
-                      <Counter classname="gap-2" value={product.quantity} />
+                      <Counter
+                        id={product.id}
+                        classname="gap-2"
+                        value={product.quantity}
+                        handleCounter={onClickCounter}
+                      />
                     </div>
                   </div>
                 </div>

@@ -44,9 +44,12 @@ const Price = ({ price }) => {
   );
 };
 
-const DeleteIcon = () => {
+const DeleteIcon = ({ onClick }) => {
   return (
-    <div className="p-1 flex items-center justify-center rounded-full border-2 border-primary text-secondary hover:bg-primary cursor-pointer">
+    <div
+      className="p-1 flex items-center justify-center rounded-full border-2 border-primary text-secondary hover:bg-primary cursor-pointer"
+      onClick={onClick}
+    >
       <AiOutlineDelete />
     </div>
   );

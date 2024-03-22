@@ -21,8 +21,30 @@ const cartSlice = createSlice({
         state.data.push(action.payload);
       }
     },
+    handleCartCounter: (state, action) => {
+      const { type, id } = action.payload;
+
+      // cari product dengan id yang sama di cart
+      const existingProduct = state.data.find((item) => item.id === id);
+
+      // Kondisi penambahan cart product berdasarkan type
+      if (type === "ADD") {
+        existingProduct.quantity += 1;
+      } else if (type === "MIN") {
+        existingProduct.quantity -= 1;
+      } else {
+        return;
+      }
+    },
+    handleRemoveProduct: (state, action) => {
+      const id = action.payload;
+
+      const newCart = state.data.filter((item) => item.id !== id);
+      state.data = newCart;
+    },
   },
 });
 
-export const { handleAddToCart } = cartSlice.actions;
+export const { handleAddToCart, handleCartCounter, handleRemoveProduct } =
+  cartSlice.actions;
 export default cartSlice.reducer;
