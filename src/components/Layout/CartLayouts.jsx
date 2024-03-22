@@ -10,6 +10,7 @@ import {
   handleCartCounter,
   handleRemoveProduct,
 } from "../../redux/slice/cartSlice";
+import Swal from "sweetalert2";
 
 const CartLayouts = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,32 @@ const CartLayouts = () => {
     dispatch(handleCartCounter({ type, id })),
   ];
 
+  const onRemoveProduct = (id, title) => {
+    Swal.fire({
+      icon: "warning",
+      title: "Warning?",
+      text: `Remove ${title} from cart?`,
+      showDenyButton: true,
+      reverseButtons: true,
+      allowOutsideClick: false,
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          dispatch(handleRemoveProduct(id));
+          Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: `Removed ${title} from cart`,
+            timer: 1000,
+            showConfirmButton: false,
+          });
+        }
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+  };
+
   return (
     <div className="w-1/5 bg-ternary relative">
       <NavbarUser />
@@ -46,7 +73,7 @@ const CartLayouts = () => {
                     <div className="absolute top-0 right-0">
                       <CardProduct.DeleteIcon
                         onClick={() =>
-                          dispatch(handleRemoveProduct(product.id))
+                          onRemoveProduct(product.id, product.title)
                         }
                       />
                     </div>

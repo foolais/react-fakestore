@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Swal from "sweetalert2";
 
 const cartSlice = createSlice({
   name: "cart",
@@ -20,6 +21,18 @@ const cartSlice = createSlice({
         // jika tidak ada produk yang sama, tambahkan newProduct
         state.data.push(action.payload);
       }
+
+      const text = existingProduct
+        ? `Updated ${existingProduct.title} in cart`
+        : `Added ${action.payload.title} to cart`;
+
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: text,
+        timer: 1500,
+        showConfirmButton: false,
+      });
     },
     handleCartCounter: (state, action) => {
       const { type, id } = action.payload;
@@ -39,8 +52,11 @@ const cartSlice = createSlice({
     handleRemoveProduct: (state, action) => {
       const id = action.payload;
 
-      const newCart = state.data.filter((item) => item.id !== id);
-      state.data = newCart;
+      // cari index product dengan id yang sama di cart
+      const existingProductIndex = state.data.findIndex(
+        (item) => item.id === id
+      );
+      state.data.splice(existingProductIndex, 1);
     },
   },
 });
