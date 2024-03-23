@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
+import { forwardRef } from "react";
 import Input from "./Input";
 import Label from "./Label";
 
-const InputForm = (props) => {
+const InputForm = forwardRef((props, ref) => {
   const {
     label,
     type,
@@ -19,9 +20,12 @@ const InputForm = (props) => {
         name={name}
         placeholder={placeholder}
         autoComplete={autoComplete}
+        ref={ref}
       />
     </div>
   );
-};
+});
+
+InputForm.displayName = "InputForm";
 
 export default InputForm;

@@ -1,7 +1,14 @@
+import { useRef, useEffect } from "react";
 import PrimaryButton from "../Elements/Button/PrimaryButton";
 import InputForm from "../Elements/Input";
 
 const FormRegister = () => {
+  const emailRef = useRef(null);
+
+  useEffect(() => {
+    emailRef.current.focus();
+  }, []);
+
   return (
     <form>
       <InputForm
@@ -10,6 +17,7 @@ const FormRegister = () => {
         name="email"
         placeholder="Johndoe17@gmail.com"
         isWithLabel={true}
+        ref={emailRef}
       />
       <InputForm
         label="Username"

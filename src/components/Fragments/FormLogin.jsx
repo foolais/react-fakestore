@@ -1,9 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../Elements/Button/PrimaryButton";
 import InputForm from "../Elements/Input";
+import { useRef, useEffect } from "react";
 
 const FormLogin = () => {
   const navigate = useNavigate();
+  const usernameRef = useRef(null);
+
   const handleLogin = (event) => {
     event.preventDefault();
     const username = event.target.username.value;
@@ -21,6 +24,10 @@ const FormLogin = () => {
     }
   };
 
+  useEffect(() => {
+    usernameRef.current.focus();
+  }, []);
+
   return (
     <form onSubmit={handleLogin}>
       <InputForm
@@ -30,6 +37,7 @@ const FormLogin = () => {
         placeholder="Johndoe"
         isWithLabel={true}
         autoComplete="username"
+        ref={usernameRef}
       />
       <InputForm
         label="Password"
