@@ -1,72 +1,19 @@
-import shoes from "../../assets/shoes";
 import SecondaryButton from "../Elements/Button/SecondaryButton";
 import Counter from "../Elements/Counter";
 import CardProduct from "../Fragments/CardProduct";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { handleAddToCart } from "../../redux/slice/cartSlice";
-import { useState } from "react";
-
-const dummyProducts = [
-  {
-    id: 1,
-    title: "Matcha Latte",
-    price: 14,
-    image: shoes,
-    quantity: 1,
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, quam porro velit dolorum consequuntur voluptatum.",
-  },
-  {
-    id: 2,
-    title: "Coffe Latte",
-    price: 15,
-    image: shoes,
-    quantity: 1,
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, quam porro velit dolorum consequuntur voluptatum.",
-  },
-  {
-    id: 3,
-    title: "Caramel Latte",
-    price: 13,
-    image: shoes,
-    quantity: 1,
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, quam porro velit dolorum consequuntur voluptatum.",
-  },
-  {
-    id: 4,
-    title: "Hazelnut Latte",
-    price: 12,
-    image: shoes,
-    quantity: 1,
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, quam porro velit dolorum consequuntur voluptatum.",
-  },
-  {
-    id: 5,
-    title: "Red Velvet",
-    price: 14.5,
-    image: shoes,
-    quantity: 1,
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, quam porro velit dolorum consequuntur voluptatum.",
-  },
-];
+import {
+  selectAllProducts,
+  handleProductCounter,
+} from "../../redux/slice/productSlice";
 
 const ProductLayout = () => {
   const dispatch = useDispatch();
-
-  const [products, setProducts] = useState(dummyProducts);
+  const products = useSelector(selectAllProducts);
 
   const handleCounter = (type, id) => {
-    setProducts((prevProducts) =>
-      prevProducts.map((item) =>
-        item.id === id
-          ? { ...item, quantity: item.quantity + (type === "ADD" ? 1 : -1) }
-          : item
-      )
-    );
+    dispatch(handleProductCounter({ type, id }));
   };
 
   return (
