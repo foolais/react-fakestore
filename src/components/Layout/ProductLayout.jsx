@@ -60,19 +60,13 @@ const ProductLayout = () => {
   const [products, setProducts] = useState(dummyProducts);
 
   const handleCounter = (type, id) => {
-    const newProducts = products.map((item) => {
-      if (item.id === id) {
-        const newItem = { ...item };
-        if (type === "ADD") {
-          newItem.quantity = item.quantity + 1;
-        } else {
-          newItem.quantity = item.quantity - 1;
-        }
-        return newItem;
-      }
-      return item;
-    });
-    setProducts(newProducts);
+    setProducts((prevProducts) =>
+      prevProducts.map((item) =>
+        item.id === id
+          ? { ...item, quantity: item.quantity + (type === "ADD" ? 1 : -1) }
+          : item
+      )
+    );
   };
 
   return (
