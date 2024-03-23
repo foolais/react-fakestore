@@ -4,17 +4,34 @@ import CardProduct from "../Fragments/CardProduct";
 import { useDispatch, useSelector } from "react-redux";
 import { handleAddToCart } from "../../redux/slice/cartSlice";
 import {
-  selectAllProducts,
+  fetchProducts,
+  getProductsData,
+  getProductsStatus,
+  getProductsError,
   handleProductCounter,
 } from "../../redux/slice/productSlice";
+import { useEffect } from "react";
 
 const ProductLayout = () => {
   const dispatch = useDispatch();
-  const products = useSelector(selectAllProducts);
+
+  const products = useSelector(getProductsData);
+  const productsStatus = useSelector(getProductsStatus);
+  const productsError = useSelector(getProductsError);
+
+  useEffect(() => {
+    if (productsStatus === "idle") dispatch(fetchProducts());
+  }, [productsStatus, dispatch]);
 
   const handleCounter = (type, id) => {
     dispatch(handleProductCounter({ type, id }));
   };
+
+  if (productsStatus === "loading") {
+    return <div>...loading</div>;
+  } else if (productsStatus === "failed") {
+    return <div>{productsError}</div>;
+  }
 
   return (
     <div className="w-[65%] bg-gray-200 relative">

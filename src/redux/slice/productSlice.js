@@ -1,57 +1,25 @@
-import { createSlice } from "@reduxjs/toolkit";
-import shoes from "../../assets/shoes";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+
+const BASE_URL = import.meta.env.VITE_BASEURL;
 
 const initialState = {
-  data: [
-    {
-      id: 1,
-      title: "Matcha Latte",
-      price: 14,
-      image: shoes,
-      quantity: 1,
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, quam porro velit dolorum consequuntur voluptatum.",
-    },
-    {
-      id: 2,
-      title: "Coffe Latte",
-      price: 15,
-      image: shoes,
-      quantity: 1,
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, quam porro velit dolorum consequuntur voluptatum.",
-    },
-    {
-      id: 3,
-      title: "Caramel Latte",
-      price: 13,
-      image: shoes,
-      quantity: 1,
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, quam porro velit dolorum consequuntur voluptatum.",
-    },
-    {
-      id: 4,
-      title: "Hazelnut Latte",
-      price: 12,
-      image: shoes,
-      quantity: 1,
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, quam porro velit dolorum consequuntur voluptatum.",
-    },
-    {
-      id: 5,
-      title: "Red Velvet",
-      price: 14.5,
-      image: shoes,
-      quantity: 1,
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, quam porro velit dolorum consequuntur voluptatum.",
-    },
-  ],
+  data: [],
   status: "idle", // 'idle' | 'loading' | 'succeeded' | 'failed'
   error: null,
 };
+
+export const fetchProducts = createAsyncThunk(
+  "product/fetchProducts",
+  async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/products`);
+      return response.data;
+    } catch (error) {
+      return error.message;
+    }
+  }
+);
 
 const productSlice = createSlice({
   name: "product",
@@ -70,10 +38,36 @@ const productSlice = createSlice({
       existingProduct.quantity += type === "ADD" ? 1 : -1;
     },
   },
-  // extraReducers: {},
+  extraReducers(builder) {
+    builder
+      .addCase(fetchProducts.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchProducts.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        const data = action.payload.map((item) => {
+          return {
+            id: item.id,
+            title: item.title,
+            image: item.image,
+            description: item.description,
+            price: item.price,
+            quantity: 1,
+          };
+        });
+
+        state.data = data;
+      })
+      .addCase(fetchProducts.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload.message;
+      });
+  },
 });
 
-export const selectAllProducts = (state) => state.product.data;
+export const getProductsData = (state) => state.product.data;
+export const getProductsStatus = (state) => state.product.status;
+export const getProductsError = (state) => state.product.error;
 
 export const { handleProductCounter } = productSlice.actions;
 
