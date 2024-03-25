@@ -12,9 +12,12 @@ import {
   resetProductCounter,
 } from "../../redux/slice/productSlice";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { handleResetStatus } from "../../redux/slice/detailProductSlice";
 
 const ProductLayout = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const products = useSelector(getProductsData);
   const productsStatus = useSelector(getProductsStatus);
@@ -38,6 +41,16 @@ const ProductLayout = () => {
     }
   };
 
+  const onNavigateSingleProduct = (id) => {
+    try {
+      dispatch(handleResetStatus());
+    } catch (error) {
+      console.warn(error);
+    } finally {
+      navigate(`/products/${id}`);
+    }
+  };
+
   if (productsStatus === "loading") {
     return <div>...loading</div>;
   } else if (productsStatus === "failed") {
@@ -57,7 +70,9 @@ const ProductLayout = () => {
                 </div>
                 <div className="w-2/3 flex flex-col py-2 px-4">
                   <CardProduct.Description
-                    description={`${product.description.substring(0, 200)}...`}
+                    description={`${product.description.substring(0, 180)}... `}
+                    showNavigate={true}
+                    onClick={() => onNavigateSingleProduct(product.id)}
                   >
                     <CardProduct.Title
                       title={`${product.title.substring(0, 24)}...`}
@@ -73,9 +88,12 @@ const ProductLayout = () => {
                   handleCounter={handleCounter}
                   classname="w-1/3 gap-4"
                 />
-                <div className="w-2/3">
+                <div className="w-2/3 flex items-center justify-center gap-2">
+                  <SecondaryButton classname="w-max rounded-2xl">
+                    Add to Favorites
+                  </SecondaryButton>
                   <SecondaryButton
-                    classname="w-10/12 rounded-2xl"
+                    classname="w-max rounded-2xl"
                     onClick={() => onAddCart(product)}
                   >
                     Add to Cart

@@ -20,14 +20,29 @@ const Image = ({ src }) => {
 };
 
 const Description = (props) => {
-  const { children, description } = props;
+  const {
+    children,
+    description,
+    showNavigate = false,
+    onClick = () => {},
+  } = props;
   return (
     <>
       <div className="flex justify-between gap-6 font-semibold mb-2">
         {children}
       </div>
       <div className="w-10/12">
-        <p className="text-sm text-justify">{description}</p>
+        <p className="text-sm text-justify">
+          {description}
+          {showNavigate && (
+            <span
+              onClick={onClick}
+              className="text-primary font-semibold cursor-pointer"
+            >
+              Read more
+            </span>
+          )}
+        </p>
       </div>
     </>
   );
