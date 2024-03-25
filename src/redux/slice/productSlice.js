@@ -21,21 +21,37 @@ export const fetchProducts = createAsyncThunk(
   }
 );
 
+// get product dengan id yang dikirim payload dan return index dan data yang product yang sama
+const getExistingProduct = (id, state) => {
+  const existingProductIndex = state.data.findIndex((item) => item.id === id);
+  const existingProduct = state.data[existingProductIndex];
+
+  return { existingProductIndex, existingProduct };
+};
+
 const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
     handleProductCounter: (state, action) => {
       const { type, id } = action.payload;
-      const existingProductIndex = state.data.findIndex(
-        (item) => item.id === id
+      const { existingProductIndex, existingProduct } = getExistingProduct(
+        id,
+        state
       );
 
       if (existingProductIndex === -1) return;
 
-      const existingProduct = state.data[existingProductIndex];
-
       existingProduct.quantity += type === "ADD" ? 1 : -1;
+    },
+    resetProductCounter: (state, action) => {
+      const id = action.payload;
+      const { existingProduct } = getExistingProduct(id, state);
+
+      console.log({ existingProduct });
+
+      // reset quantity
+      existingProduct.quantity = 1;
     },
   },
   extraReducers(builder) {
@@ -69,6 +85,7 @@ export const getProductsData = (state) => state.product.data;
 export const getProductsStatus = (state) => state.product.status;
 export const getProductsError = (state) => state.product.error;
 
-export const { handleProductCounter } = productSlice.actions;
+export const { handleProductCounter, resetProductCounter } =
+  productSlice.actions;
 
 export default productSlice.reducer;

@@ -9,6 +9,7 @@ import {
   getProductsStatus,
   getProductsError,
   handleProductCounter,
+  resetProductCounter,
 } from "../../redux/slice/productSlice";
 import { useEffect } from "react";
 
@@ -25,6 +26,16 @@ const ProductLayout = () => {
 
   const handleCounter = (type, id) => {
     dispatch(handleProductCounter({ type, id }));
+  };
+
+  const onAddCart = (product) => {
+    try {
+      dispatch(handleAddToCart(product));
+    } catch (error) {
+      console.warn(error);
+    } finally {
+      dispatch(resetProductCounter(product.id));
+    }
   };
 
   if (productsStatus === "loading") {
@@ -65,7 +76,7 @@ const ProductLayout = () => {
                 <div className="w-2/3">
                   <SecondaryButton
                     classname="w-10/12 rounded-2xl"
-                    onClick={() => dispatch(handleAddToCart(product))}
+                    onClick={() => onAddCart(product)}
                   >
                     Add to Cart
                   </SecondaryButton>
