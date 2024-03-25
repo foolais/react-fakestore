@@ -1,6 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Swal from "sweetalert2";
 
+// get cart dengan id yang dikirim payload dan return index dan data yang cart yang sama
+const getExistingCart = (id, state) => {
+  const existingCartIndex = state.data.findIndex((item) => item.id === id);
+  const existingCart = state.data[existingCartIndex];
+
+  return { existingCartIndex, existingCart };
+};
+
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
@@ -9,12 +17,11 @@ const cartSlice = createSlice({
   reducers: {
     handleAddToCart: (state, action) => {
       const { id, quantity } = action.payload;
+      const { existingCartIndex, existingCart } = getExistingCart(id, state);
 
-      const index = state.data.findIndex((item) => item.id === id); // cari index product dengan id yang sama di cart
-
-      if (index !== -1) {
+      if (existingCartIndex !== -1) {
         // jika ada index lakukan update quantity
-        state.data[index].quantity += quantity;
+        existingCart.quantity += quantity;
       } else {
         // jika tidak ada index masukan data baru ke cart
         state.data.push(action.payload);
@@ -22,8 +29,8 @@ const cartSlice = createSlice({
 
       // kondisional untuk text swal
       const text =
-        index !== -1
-          ? `Updated ${state.data[index].title} in cart`
+        existingCartIndex !== -1
+          ? `Updated ${existingCart.title} in cart`
           : `Added ${action.payload.title} to cart`;
 
       Swal.fire({
@@ -36,24 +43,17 @@ const cartSlice = createSlice({
     },
     handleCartCounter: (state, action) => {
       const { type, id } = action.payload;
-      const existingProductIndex = state.data.findIndex(
-        (item) => item.id === id
-      ); // cari index product dengan id yang sama di cart
+      const { existingCartIndex, existingCart } = getExistingCart(id, state);
 
-      if (existingProductIndex === -1) return; // jika tidak ada index return
+      if (existingCartIndex === -1) return; // jika tidak ada index return
 
-      const existingProduct = state.data[existingProductIndex]; //cari product dengan index tersebut
-
-      existingProduct.quantity += type === "ADD" ? 1 : -1;
+      existingCart.quantity += type === "ADD" ? 1 : -1;
     },
     handleRemoveProduct: (state, action) => {
       const id = action.payload;
+      const { existingCartIndex } = getExistingCart(id, state);
 
-      // cari index product dengan id yang sama di cart
-      const existingProductIndex = state.data.findIndex(
-        (item) => item.id === id
-      );
-      state.data.splice(existingProductIndex, 1);
+      state.data.splice(existingCartIndex, 1);
     },
   },
 });
