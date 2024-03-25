@@ -14,7 +14,7 @@ const Image = ({ src }) => {
     <img
       src={src}
       alt="shoes"
-      className="w-full min-h-32 h-full object-cover object-center rounded-lg shadow-md"
+      className="w-full min-h-44 max-h-44 h-full object-cover object-top rounded-lg shadow-md"
     />
   );
 };
@@ -23,7 +23,9 @@ const Description = (props) => {
   const { children, description } = props;
   return (
     <>
-      <div className="flex gap-6 font-semibold mb-2">{children}</div>
+      <div className="flex justify-between gap-6 font-semibold mb-2">
+        {children}
+      </div>
       <div className="w-10/12">
         <p className="text-sm text-justify">{description}</p>
       </div>

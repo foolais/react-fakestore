@@ -45,8 +45,12 @@ const ProductLayout = () => {
                   <CardProduct.Image src={product.image} />
                 </div>
                 <div className="w-2/3 flex flex-col py-2 px-4">
-                  <CardProduct.Description description={product.description}>
-                    <CardProduct.Title title={product.title} />
+                  <CardProduct.Description
+                    description={`${product.description.substring(0, 200)}...`}
+                  >
+                    <CardProduct.Title
+                      title={`${product.title.substring(0, 24)}...`}
+                    />
                     <CardProduct.Price price={product.price} />
                   </CardProduct.Description>
                 </div>

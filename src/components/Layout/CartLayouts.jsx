@@ -59,7 +59,7 @@ const CartLayouts = () => {
   return (
     <div className="w-1/5 bg-ternary h-screen fixed right-0">
       <NavbarUser />
-      <div className="py-2 overflow-y-auto h-[80vh]">
+      <div className="py-2 overflow-y-auto h-[85vh]">
         <h3 className="text-xl font-semibold ml-4 mt-4">Cart</h3>
         {products.length > 0 &&
           products.map((product) => {
