@@ -1,11 +1,11 @@
 import ContainerLayouts from "../components/Layout/ContainerLayouts";
 
-const HomePage = () => {
+const DetailPage = () => {
   return (
     <ContainerLayouts>
-      <h2>Homepage</h2>
+      <div>About</div>
     </ContainerLayouts>
   );
 };
 
-export default HomePage;
+export default DetailPage;

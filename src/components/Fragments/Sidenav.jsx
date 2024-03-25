@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import Title from "../Elements/Title";
 import {
   AiOutlineLogout,
@@ -33,12 +32,12 @@ const Sidenav = () => {
     },
     {
       id: 2,
-      title: "Cart",
+      title: "Products",
       icon: <AiOutlineShoppingCart size={sizeIcon} />,
     },
     {
       id: 3,
-      title: "Favorite",
+      title: "Favorites",
       icon: <AiOutlineStar size={sizeIcon} />,
     },
     {
@@ -53,10 +52,18 @@ const Sidenav = () => {
     },
   ];
 
+  const handleNavigate = (title) => {
+    if (title === "Homepage") {
+      navigate("/");
+    } else {
+      navigate(`/${title.toLowerCase()}`);
+    }
+  };
+
   return (
     <div className="w-[15%] h-screen fixed bg-ternary p-4 border-r-2 border-slate-200 shadow-md">
       <Title classname="text-3xl mb-4" />
-      <ListTextIcon data={sidenavList} />
+      <ListTextIcon data={sidenavList} handleNavigate={handleNavigate} />
       <div className="absolute bottom-14">
         <TextIcon title="Log out" onClick={() => handleLogout()}>
           <AiOutlineLogout size={sizeIcon} />
